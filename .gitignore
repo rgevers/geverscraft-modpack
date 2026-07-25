@@ -1,0 +1,12 @@
+# packwiz-installer runtime (regenerated on each client/server)
+packwiz-installer-bootstrap.jar
+packwiz-installer.jar
+.index-cache.json
+
+# exported artifacts (rebuild with `packwiz modrinth export`)
+*.mrpack
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
