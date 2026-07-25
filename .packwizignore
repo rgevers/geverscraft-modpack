@@ -1,0 +1,13 @@
+# Repo tooling and docs — NOT part of the deployed modpack.
+# Without this, `packwiz refresh` indexes these as overrides and packwiz-installer
+# pushes them to every client and the server.
+.git/
+.gitignore
+.packwizignore
+README.md
+LICENSE
+docs/
+server/
+seed-from-mrpack.ps1
+*.mrpack
+packwiz-installer-bootstrap.jar

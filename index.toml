@@ -1,10 +1,6 @@
 hash-format = "sha256"
 
 [[files]]
-file = "README.md"
-hash = "77c7cb9c8379467194dcfdb6837c455e77a711d20badbb887d1d7e024405df50"
-
-[[files]]
 file = "config/DistantHorizons.toml"
 hash = "8fdb095518ccfae299497b41375e3e46dbed201a44c689ddacca449b6968eacf"
 
@@ -350,10 +346,6 @@ hash = "c25c92ba7878a262e0a194191256d0dc2ba52c35a1dcb554669a5806b7f2d792"
 metafile = true
 
 [[files]]
-file = "docs/SIDE_FLAGS.md"
-hash = "99775cd050ac14e547df3ab52cc3f2c58eda2e189925997dbb556546ab40e9fe"
-
-[[files]]
 file = "mods/ambientsounds.pw.toml"
 hash = "57acf96b36adbdf82d86f5e51d1dd82f739b8232c0574c4b4a5b36cc8801f14c"
 metafile = true
@@ -567,14 +559,6 @@ metafile = true
 file = "resourcepacks/matcha-resourcepack.pw.toml"
 hash = "372a76114be2d47039635a7cb8bae7787c5106bfe317903046779a3b8bcd246e"
 metafile = true
-
-[[files]]
-file = "seed-from-mrpack.ps1"
-hash = "c587828fb8b392ffe103f312cc1eafa8e9a4191af8d72e7fec959b8b277dee76"
-
-[[files]]
-file = "server/install-server.sh"
-hash = "ef35dbbdcd93e7907935def750108d6e80d368c10c3b3b259808923ea5e94a0e"
 
 [[files]]
 file = "shaderpacks/sildurs-vibrant-shaders.pw.toml"
