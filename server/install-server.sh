@@ -49,9 +49,10 @@ cat > start <<EOF
 set -euo pipefail
 cd "\$(dirname "\$0")"
 
-# Auto-update mods from the pack on every start. Comment out to pin the server
-# and update only when you deliberately re-run the sync.
-"${JAVA_BIN}" -jar packwiz-installer-bootstrap.jar -g -s server "${PACK_URL}"
+# Auto-update mods from the pack on every start. Non-fatal on purpose: a
+# transient sync failure (e.g. GitHub CDN lag) logs a warning and boots with the
+# existing mods rather than aborting the whole server under 'set -e'.
+"${JAVA_BIN}" -jar packwiz-installer-bootstrap.jar -g -s server "${PACK_URL}" || echo "WARN: pack sync failed; starting with existing mods"
 
 # Launch the NeoForge dedicated server.
 exec "${JAVA_BIN}" @user_jvm_args.txt @libraries/net/neoforged/neoforge/${NEOFORGE_VERSION}/unix_args.txt nogui
