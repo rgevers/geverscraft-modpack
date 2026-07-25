@@ -11,7 +11,7 @@ set -euo pipefail
 # ------------------------- fill these in -------------------------
 SERVER_NAME="modpack"                # -> /opt/minecraft/<name>, and `mcctl start <name>`
 NEOFORGE_VERSION="26.2.0.32-beta"    # EXACT loader build (from the .mrpack dependencies)
-PACK_URL="https://raw.githubusercontent.com/rgevers/geverscraft-modpack/main/pack.toml"
+PACK_URL="https://raw.githubusercontent.com/rgevers/geverscraft-modpack/master/pack.toml"
 XMX="6G"                             # Java heap; size to the box (leave headroom for the OS)
 # -----------------------------------------------------------------
 

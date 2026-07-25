@@ -44,7 +44,7 @@ public raw-URL hosting legal and painless.
    ```
 
 Your pack.toml is now reachable at:
-`https://raw.githubusercontent.com/rgevers/geverscraft-modpack/main/pack.toml`
+`https://raw.githubusercontent.com/rgevers/geverscraft-modpack/master/pack.toml`
 — that URL is what both players and the server point at.
 
 ---
