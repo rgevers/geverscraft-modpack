@@ -516,6 +516,11 @@ hash = "56cbcd79f1d444ab733aa39e4835a970fde9d8687d050defdcbc44b6d9368326"
 metafile = true
 
 [[files]]
+file = "mods/spark.pw.toml"
+hash = "b027f2051203f2c6ab528ed21e806c801effd5388ca6dbe215f4eea946616ab2"
+metafile = true
+
+[[files]]
 file = "mods/terrablender.pw.toml"
 hash = "ec35f24c80ef2c0ae9737cd3a8b61142697f1e4025b950947b9b32fdf0ae90d0"
 metafile = true
