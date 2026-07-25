@@ -1,0 +1,4 @@
+# Pack files are hashed by packwiz and served verbatim to clients/server.
+# Git must NOT rewrite line endings, or the served bytes won't match the
+# index hashes and packwiz-installer fails with "Hash invalid".
+* -text
