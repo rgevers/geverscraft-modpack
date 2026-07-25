@@ -1,6 +1,11 @@
 name = "Controlify (Controller support)"
 filename = "controlify-3.1.1+mc26.2-universal.jar"
-side = "both"
+side = "client"
+
+[option]
+optional = true
+default = true
+description = "Controller support. Disable if you have many HID / flight-sim peripherals that conflict with it."
 
 [download]
 url = "https://cdn.modrinth.com/data/DOUdJVEm/versions/3Z0RNraJ/controlify-3.1.1%2Bmc26.2-universal.jar"
