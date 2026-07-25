@@ -73,9 +73,7 @@ Give each player a **Prism Launcher** instance (best) or the **Modrinth App**:
   add a pre-launch command running packwiz-installer against the pack URL. On
   every launch it pulls only what changed — you push, they relaunch, done.
   See https://packwiz.infra.link/tutorials/installing/prism/
-- **Modrinth App (simple):** hand them a `packwiz modrinth export` `.mrpack` to
-  import. Fine for occasional updates; less automatic than the Prism flow.
-
+- Pre-launch command: "$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/rgevers/geverscraft-modpack/master/pack.toml
 ---
 
 ## Deploying to the server
