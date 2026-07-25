@@ -12,7 +12,10 @@ set -euo pipefail
 SERVER_NAME="modpack"                # -> /opt/minecraft/<name>, and `mcctl start <name>`
 NEOFORGE_VERSION="26.2.0.32-beta"    # EXACT loader build (from the .mrpack dependencies)
 PACK_URL="https://raw.githubusercontent.com/rgevers/geverscraft-modpack/master/pack.toml"
-XMX="6G"                             # Java heap; size to the box (leave headroom for the OS)
+XMX="10G"                            # Java heap. Your 1.21.1 server uses 12G; 10G leaves a bit
+                                     # more off-heap headroom for this heavier modded pack
+JAVA_BIN="java"                      # MC 26.2 needs Java 25! set to the Corretto 25 path,
+                                     # e.g. /usr/lib/jvm/java-25-amazon-corretto/bin/java
 # -----------------------------------------------------------------
 
 ROOT="/opt/minecraft/${SERVER_NAME}"
@@ -26,17 +29,18 @@ cd "${ROOT}"
 echo ">> Installing NeoForge server ${NEOFORGE_VERSION}"
 curl -fSL -o "${INSTALLER}" \
   "https://maven.neoforged.net/releases/net/neoforged/neoforge/${NEOFORGE_VERSION}/${INSTALLER}"
-java -jar "${INSTALLER}" --installServer
+"${JAVA_BIN}" -jar "${INSTALLER}" --installServer
 rm -f "${INSTALLER}" "${INSTALLER}.log"
 
 echo ">> Fetching packwiz-installer bootstrap"
 curl -fSL -o packwiz-installer-bootstrap.jar "${BOOTSTRAP_URL}"
 
 echo ">> Syncing server-side mods from the pack"
-java -jar packwiz-installer-bootstrap.jar -g -s server "${PACK_URL}"
+"${JAVA_BIN}" -jar packwiz-installer-bootstrap.jar -g -s server "${PACK_URL}"
 
 echo ">> Writing JVM args and accepting the Minecraft EULA"
-echo "-Xmx${XMX}" > user_jvm_args.txt
+# Tuned G1GC ("Aikar's flags"), matching the existing 1.21.1 server; heap = $XMX
+echo "-Xmx${XMX} -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1" > user_jvm_args.txt
 echo "eula=true" > eula.txt          # you are accepting https://aka.ms/MinecraftEULA
 
 echo ">> Writing start script"
@@ -47,10 +51,10 @@ cd "\$(dirname "\$0")"
 
 # Auto-update mods from the pack on every start. Comment out to pin the server
 # and update only when you deliberately re-run the sync.
-java -jar packwiz-installer-bootstrap.jar -g -s server "${PACK_URL}"
+"${JAVA_BIN}" -jar packwiz-installer-bootstrap.jar -g -s server "${PACK_URL}"
 
 # Launch the NeoForge dedicated server.
-exec java @user_jvm_args.txt @libraries/net/neoforged/neoforge/${NEOFORGE_VERSION}/unix_args.txt nogui
+exec "${JAVA_BIN}" @user_jvm_args.txt @libraries/net/neoforged/neoforge/${NEOFORGE_VERSION}/unix_args.txt nogui
 EOF
 chmod +x start
 
