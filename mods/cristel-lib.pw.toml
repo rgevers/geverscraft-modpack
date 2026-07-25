@@ -1,0 +1,13 @@
+name = "Cristel Lib"
+filename = "cristellib-neoforge-26.2-3.1.11.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/cl223EMc/versions/rVwhMA5a/cristellib-neoforge-26.2-3.1.11.jar"
+hash-format = "sha512"
+hash = "06fa0508533b70fe912fd06b2b8860617ffd5d0203f54015a0c4df0f47c38fc602402e1697909da38044d667f3377c894b88fd47087c164ae022b020a64a0e08"
+
+[update]
+[update.modrinth]
+mod-id = "cl223EMc"
+version = "rVwhMA5a"

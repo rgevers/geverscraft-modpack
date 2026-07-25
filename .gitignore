@@ -6,6 +6,9 @@ packwiz-installer.jar
 # exported artifacts (rebuild with `packwiz modrinth export`)
 *.mrpack
 
+# one-time seeding helper (not part of the pack)
+seed-from-mrpack.ps1
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db

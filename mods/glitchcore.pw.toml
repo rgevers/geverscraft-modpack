@@ -1,0 +1,13 @@
+name = "GlitchCore"
+filename = "GlitchCore-neoforge-26.2-26.2.0.0.0.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/s3dmwKy5/versions/POAebwFo/GlitchCore-neoforge-26.2-26.2.0.0.0.jar"
+hash-format = "sha512"
+hash = "3d8a05aa40beb03b7e3490a7da4bc5839daf5ac4e357daa4a8cb42fbaa221101192857d8cb7bea780a21a90bf3d810d61dd5d0ca184157cffc4442ff7ee7f1c4"
+
+[update]
+[update.modrinth]
+mod-id = "s3dmwKy5"
+version = "POAebwFo"

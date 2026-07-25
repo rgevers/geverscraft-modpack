@@ -1,0 +1,13 @@
+name = "Geverscraft 2026"
+author = "Rob Gevers"
+version = "1.0.0"
+pack-format = "packwiz:1.1.0"
+
+[index]
+file = "index.toml"
+hash-format = "sha256"
+hash = "7ec00e1ae7eb07ca6f9017a981e17eeb39124c052fb0e49a625a4951de8e4109"
+
+[versions]
+minecraft = "26.2"
+neoforge = "26.2.0.32-beta"

@@ -1,0 +1,13 @@
+name = "Dungeons and Taverns"
+filename = "dungeons-and-taverns-5.3.0.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/tpehi7ww/versions/UP9sRfQF/dungeons-and-taverns-5.3.0.jar"
+hash-format = "sha512"
+hash = "c4b6e6e5be6fa77f9d12d584a10fd541377a75ec926aba12e55d360518425aadf8832e1e9eb5a774a7388bd340879ab79ddd115b9e5263e6f44d23c021f9a111"
+
+[update]
+[update.modrinth]
+mod-id = "tpehi7ww"
+version = "UP9sRfQF"

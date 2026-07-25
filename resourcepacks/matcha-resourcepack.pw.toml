@@ -1,0 +1,8 @@
+name = "matcha-resourcepack"
+filename = "Matcha_Flavoured.zip"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/QI0EmgZ1/versions/F9AXkYTk/Matcha_Flavoured.zip"
+hash-format = "sha256"
+hash = "13a5f7067a64a2829f0017ab42a5956dd3459785448fa0d7bf938bb540ece6f6"

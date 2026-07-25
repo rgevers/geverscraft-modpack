@@ -1,0 +1,13 @@
+name = "Xaero's Minimap"
+filename = "xaerominimap-neoforge-26.2-26.4.2.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/1bokaNcj/versions/IqOn6XCo/xaerominimap-neoforge-26.2-26.4.2.jar"
+hash-format = "sha512"
+hash = "62c9515cac9019e1ce85c6e21f316d8395d745dfef23e22a0236c14fe1a3afb8c169d4d5778d5e4b6b03a0aeb03d46797e6dc69d63afcf4a3ce59f1aa28f605a"
+
+[update]
+[update.modrinth]
+mod-id = "1bokaNcj"
+version = "IqOn6XCo"

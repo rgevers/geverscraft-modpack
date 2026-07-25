@@ -1,0 +1,8 @@
+name = "fresh-animations"
+filename = "FreshAnimations_v1.10.5.zip"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/50dA9Sha/versions/RGIzA5em/FreshAnimations_v1.10.5.zip"
+hash-format = "sha256"
+hash = "cf9f17a2977e171b33cb0b598bc4357dd0383e09c10d5f768ff17c12d0a028ee"

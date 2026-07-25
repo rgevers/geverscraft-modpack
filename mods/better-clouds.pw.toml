@@ -1,0 +1,13 @@
+name = "Better Clouds"
+filename = "better-clouds-1.14.1+26.2-neoforge.jar"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/5srFLIaK/versions/EnhaqJPE/better-clouds-1.14.1%2B26.2-neoforge.jar"
+hash-format = "sha512"
+hash = "51824e74c8b9b6d3bcf09ada84cf3d745c620476bb3330a57e4ed45fe79d897e49b9dc4580d9a850613c209458133c6e865a2f81bf07e9781b26192717e4565d"
+
+[update]
+[update.modrinth]
+mod-id = "5srFLIaK"
+version = "EnhaqJPE"
