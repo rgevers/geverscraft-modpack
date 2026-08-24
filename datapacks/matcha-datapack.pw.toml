@@ -1,8 +1,8 @@
 name = "matcha-datapack"
-filename = "Matcha_Flavoured.zip"
+filename = "Matcha_Flavoured_1_12.zip"
 side = "both"
 
 [download]
-url = "https://cdn.modrinth.com/data/QI0EmgZ1/versions/F9AXkYTk/Matcha_Flavoured.zip"
-hash-format = "sha256"
-hash = "13a5f7067a64a2829f0017ab42a5956dd3459785448fa0d7bf938bb540ece6f6"
+url = "https://cdn.modrinth.com/data/QI0EmgZ1/versions/E9rngRfK/Matcha_Flavoured_1_12.zip"
+hash-format = "sha512"
+hash = "90cc56fd72caea4f0f45bb3817b64e5fb76ff600bad9cf5ae4d4bc340f717d44cce4ed9f94def18b4b3902124df6d96a488c3941661e89ad863db536390db056"

@@ -82,20 +82,29 @@ git commit -am "Update mods" && git push
 Clients pick up the new mods on their next launch. The server picks them up on
 its next restart (its `start` script re-syncs every launch).
 
-### Matcha Flavoured resource pack (manual pin)
+### Matcha Flavoured (manual pin, TWO files)
 
-`resourcepacks/matcha-resourcepack.pw.toml` is a **hand-written** pin with no
-`[update]` block, so `packwiz update` skips it. Its Modrinth project (id
-`QI0EmgZ1`) blocks third-party downloads, so `packwiz modrinth add` refuses it.
-Bump it by hand:
+Matcha Flavoured ships as one zip that acts as both a resource pack and a
+datapack, so it lives in the pack **twice**. Both files must point at the same
+version, or the server and client drift:
+
+- `resourcepacks/matcha-resourcepack.pw.toml` — `side = "client"`.
+- `datapacks/matcha-datapack.pw.toml` — `side = "both"` (this is the copy the
+  **server** syncs).
+
+Both are **hand-written** pins with no `[update]` block, so `packwiz update` skips
+them. The Modrinth project (id `QI0EmgZ1`) blocks third-party downloads, so
+`packwiz modrinth add` refuses it. Bump both by hand:
 
 1. On the Modrinth project page, copy the new version's download URL. It looks
    like `https://cdn.modrinth.com/data/QI0EmgZ1/versions/<VERSION_ID>/<file>.zip`.
 2. Get the file hash without downloading the zip: open
    `https://api.modrinth.com/v2/version/<VERSION_ID>` and copy the file's
    **sha512** value. (The Modrinth API gives sha1 and sha512, not sha256.)
-3. Edit `resourcepacks/matcha-resourcepack.pw.toml`: set `filename`, `url` (drop
-   any `?mr_download_reason=...` query), `hash-format = "sha512"`, and `hash`.
+3. Edit **both** `resourcepacks/matcha-resourcepack.pw.toml` **and**
+   `datapacks/matcha-datapack.pw.toml`: set `filename`, `url` (drop any
+   `?mr_download_reason=...` query), `hash-format = "sha512"`, and `hash`. Keep
+   each file's own `side` value.
 4. `packwiz refresh`, then commit and push.
 
 ### NeoForge loader (manual, three places that must match)
