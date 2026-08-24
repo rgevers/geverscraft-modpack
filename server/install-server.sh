@@ -10,7 +10,7 @@ set -euo pipefail
 
 # ------------------------- fill these in -------------------------
 SERVER_NAME="modpack"                # -> /opt/minecraft/<name>, and `mcctl start <name>`
-NEOFORGE_VERSION="26.2.0.32-beta"    # EXACT loader build (from the .mrpack dependencies)
+NEOFORGE_VERSION="26.2.0.67"    # EXACT loader build (from the .mrpack dependencies)
 PACK_URL="https://raw.githubusercontent.com/rgevers/geverscraft-modpack/master/pack.toml"
 XMX="10G"                            # Java heap. Your 1.21.1 server uses 12G; 10G leaves a bit
                                      # more off-heap headroom for this heavier modded pack
