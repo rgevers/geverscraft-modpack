@@ -1,13 +1,13 @@
 name = "Bundle Upgrade"
-filename = "BundleUpgrade-v26.2.0-mc26.2.x-NeoForge.jar"
+filename = "BundleUpgrade-v26.2.2-mc26.2.x-NeoForge.jar"
 side = "both"
 
 [download]
-url = "https://cdn.modrinth.com/data/4GmQWkZz/versions/LhdqWDaW/BundleUpgrade-v26.2.0-mc26.2.x-NeoForge.jar"
+url = "https://cdn.modrinth.com/data/4GmQWkZz/versions/fvv0IiMe/BundleUpgrade-v26.2.2-mc26.2.x-NeoForge.jar"
 hash-format = "sha512"
-hash = "b2407b063f3eff3033e5657b47835a4664a40d26a2647bfbafea91bf5ed0c95305532c34b3ae9c8790e837d12944e3eaba5d1b45d592dad06a43d58361e07c84"
+hash = "eb8fad85a01c48b9f101ecb837a13c83691e01534847300e4f842ca557d648ba5bc67f1eb9ffcaa6cf0e7b64b3d45cb6b2ec086f605ea4c3b394f1b36747b6d4"
 
 [update]
 [update.modrinth]
 mod-id = "4GmQWkZz"
-version = "LhdqWDaW"
+version = "fvv0IiMe"

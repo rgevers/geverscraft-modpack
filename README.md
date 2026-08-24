@@ -67,13 +67,64 @@ A bad update is just `git revert`.
 
 ## Distributing to players
 
-Give each player a **Prism Launcher** instance (best) or the **Modrinth App**:
+Players run a **Prism Launcher** instance whose *pre-launch command* runs
+packwiz-installer to auto-sync the pack on every launch. The one catch:
+`packwiz-installer-bootstrap.jar` **must live in the instance's `.minecraft`
+folder**, or Prism aborts with:
 
-- **Prism (auto-sync, recommended):** create an instance on NeoForge 26.2, then
-  add a pre-launch command running packwiz-installer against the pack URL. On
-  every launch it pulls only what changed — you push, they relaunch, done.
-  See https://packwiz.infra.link/tutorials/installing/prism/
-- Pre-launch command: "$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/rgevers/geverscraft-modpack/master/pack.toml
+```
+Error: Unable to access jarfile packwiz-installer-bootstrap.jar
+```
+
+Two ways to set players up. Option A avoids that error entirely.
+
+### Option A — Export once, players import (recommended)
+
+Build one reference instance, then hand out a zip. The bootstrap jar and the
+pre-launch command travel *inside* the export, so players place nothing by hand
+and the "jar not accessible" error cannot happen.
+
+1. Build a reference instance yourself using **Option B** below, and launch it
+   once to confirm it syncs and plays.
+2. In Prism: right-click the instance → **Export Instance** → keep `.minecraft`
+   checked → save the `.zip`.
+3. Send players the zip. They install Prism, then **Add Instance → Import from
+   zip** → launch. Done — it self-updates on every launch from then on.
+
+### Option B — Manual setup on a machine
+
+1. Install **Prism Launcher**.
+2. **Add Instance → NeoForge → Minecraft `26.2` → loader `26.2.0.32-beta`**
+   (tick "show beta versions" in the version list if it's hidden).
+3. **Put the bootstrap jar in `.minecraft`** — this is the step that prevents the
+   error. Right-click the instance → **Folder** (opens `.minecraft`), and
+   download the jar into that folder:
+   ```
+   https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar
+   ```
+   Confirm it's ~97 KB (a few hundred bytes means you saved an error page — re-download).
+4. **Instance Settings → Custom Commands → enable**, and set the **Pre-launch
+   command** — referencing the jar by absolute path via `$INST_MC_DIR` so it's
+   found no matter the working directory:
+   ```
+   "$INST_JAVA" -jar "$INST_MC_DIR/packwiz-installer-bootstrap.jar" https://raw.githubusercontent.com/rgevers/geverscraft-modpack/master/pack.toml
+   ```
+5. **Launch.** It downloads the mods/configs/packs, then starts the game.
+
+### Still seeing "Unable to access jarfile"?
+
+The jar isn't where the command is looking. Check, in order:
+1. `packwiz-installer-bootstrap.jar` is actually in the instance's `.minecraft`
+   folder (right-click → Folder to verify), ~97 KB.
+2. The pre-launch command uses `"$INST_MC_DIR/packwiz-installer-bootstrap.jar"`
+   (absolute), **not** a bare `packwiz-installer-bootstrap.jar`.
+3. On Windows, if the download saved as HTML (tiny file), re-download from the
+   direct release URL above rather than a browser "Save link as" on the releases page.
+
+> Alternative for anyone who insists on the Modrinth App: run `packwiz modrinth
+> export`, hand them the `.mrpack`, and they import it. No packwiz-installer, but
+> updates are manual re-imports rather than automatic.
+
 ---
 
 ## Deploying to the server

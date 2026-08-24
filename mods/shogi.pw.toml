@@ -1,13 +1,13 @@
 name = "Shogi"
-filename = "shogi-neoforge-26.2-26.2.0.3.jar"
+filename = "shogi-neoforge-26.2-26.2.0.5.jar"
 side = "both"
 
 [download]
-url = "https://cdn.modrinth.com/data/bi4iCmsw/versions/rd0C4k0K/shogi-neoforge-26.2-26.2.0.3.jar"
+url = "https://cdn.modrinth.com/data/bi4iCmsw/versions/1EnqqRIV/shogi-neoforge-26.2-26.2.0.5.jar"
 hash-format = "sha512"
-hash = "046ae7075b2c08b0410eb1e95e5060f65ce8085b060d514faae16778fe295d9f2f9bb12ef0ee18bdf29f1c46b5b8211b138d42bbaa7b2c985b6318d6c056e443"
+hash = "a307e8e7e627aed9128ee84ea1bade9fbd609a4547c69d2ed2b6be0dca958dcdfd416200c758fc97cbf160ae2e4bb3a2023665b377a6065b703495d78a76268e"
 
 [update]
 [update.modrinth]
 mod-id = "bi4iCmsw"
-version = "rd0C4k0K"
+version = "1EnqqRIV"

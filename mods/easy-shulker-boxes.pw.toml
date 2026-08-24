@@ -1,13 +1,13 @@
 name = "Easy Shulker Boxes"
-filename = "EasyShulkerBoxes-v26.2.1-mc26.2.x-NeoForge.jar"
+filename = "EasyShulkerBoxes-v26.2.3-mc26.2.x-NeoForge.jar"
 side = "both"
 
 [download]
-url = "https://cdn.modrinth.com/data/gA5euN8S/versions/BusqkLTb/EasyShulkerBoxes-v26.2.1-mc26.2.x-NeoForge.jar"
+url = "https://cdn.modrinth.com/data/gA5euN8S/versions/SudCQ8ql/EasyShulkerBoxes-v26.2.3-mc26.2.x-NeoForge.jar"
 hash-format = "sha512"
-hash = "4684dfee95ba5cf34c8b3a1ca5b72f2ebcfa470e149c78c738e455f2e88395d285db148ab9e9ca358e5a92e1bb2b60cfb62f412639d926f5bf1f31612fcff1aa"
+hash = "7391da7333fb409e8121ae1da3f79e2a493182c46df9f4fe28e8ac3c607d8b3ab8c58c720dbfb86560dd463fbc5640239038b50e25e4dc8abc56c714d52501ce"
 
 [update]
 [update.modrinth]
 mod-id = "gA5euN8S"
-version = "BusqkLTb"
+version = "SudCQ8ql"

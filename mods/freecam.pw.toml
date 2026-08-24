@@ -1,13 +1,13 @@
 name = "Freecam"
-filename = "freecam-neoforge-1.4.1-beta.2+mc26.2.jar"
+filename = "freecam-neoforge-1.4.1-beta.3+mc26.2.jar"
 side = "client"
 
 [download]
-url = "https://cdn.modrinth.com/data/XeEZ3fK2/versions/NFOXHbbK/freecam-neoforge-1.4.1-beta.2%2Bmc26.2.jar"
+url = "https://cdn.modrinth.com/data/XeEZ3fK2/versions/RUixp3F0/freecam-neoforge-1.4.1-beta.3%2Bmc26.2.jar"
 hash-format = "sha512"
-hash = "a8fb7f33f33584ad53e734ccaa43accd607ecf5b1ae7585a9e757a36c0c5e569f9832cebf37af21289ae37ba17336c791dc214b14d2f6cb7eee5df6b1b1efd81"
+hash = "2b4011121f74e65b9848146b4f5a1d1cbda3d2cddb9b1e2bdf66fd5a2441b028f2a41289183cb62af3de4f71d15c4ddb714222d8aaf95d599d3161e48ffb6f97"
 
 [update]
 [update.modrinth]
 mod-id = "XeEZ3fK2"
-version = "NFOXHbbK"
+version = "RUixp3F0"
