@@ -40,7 +40,7 @@ public raw-URL hosting legal and painless.
    ```
    git add -A && git commit -m "Initial pack import"
    git remote add origin https://github.com/rgevers/geverscraft-modpack.git
-   git push -u origin main
+   git push -u origin master
    ```
 
 Your pack.toml is now reachable at:
@@ -62,6 +62,63 @@ git commit -am "..." && git push   # ship it
 
 `git log` is your changelog; tag releases you care about: `git tag v1.1.0 && git push --tags`.
 A bad update is just `git revert`.
+
+---
+
+## Bumping versions
+
+Three kinds of version live in this repo. Each bumps a different way.
+
+### Mods (packwiz-managed)
+
+Most mods carry an `[update.modrinth]` block, so packwiz bumps them for you:
+
+```
+packwiz update --all               # or: packwiz update <mod>
+packwiz refresh
+git commit -am "Update mods" && git push
+```
+
+Clients pick up the new mods on their next launch. The server picks them up on
+its next restart (its `start` script re-syncs every launch).
+
+### Matcha Flavoured resource pack (manual pin)
+
+`resourcepacks/matcha-resourcepack.pw.toml` is a **hand-written** pin with no
+`[update]` block, so `packwiz update` skips it. Its Modrinth project (id
+`QI0EmgZ1`) blocks third-party downloads, so `packwiz modrinth add` refuses it.
+Bump it by hand:
+
+1. On the Modrinth project page, copy the new version's download URL. It looks
+   like `https://cdn.modrinth.com/data/QI0EmgZ1/versions/<VERSION_ID>/<file>.zip`.
+2. Get the file hash without downloading the zip: open
+   `https://api.modrinth.com/v2/version/<VERSION_ID>` and copy the file's
+   **sha512** value. (The Modrinth API gives sha1 and sha512, not sha256.)
+3. Edit `resourcepacks/matcha-resourcepack.pw.toml`: set `filename`, `url` (drop
+   any `?mr_download_reason=...` query), `hash-format = "sha512"`, and `hash`.
+4. `packwiz refresh`, then commit and push.
+
+### NeoForge loader (manual, three places that must match)
+
+packwiz does **not** manage the loader. Its version lives in three spots, and all
+three must hold the same build:
+
+1. `pack.toml` → `[versions] neoforge` — drives each **client** install.
+2. `server/install-server.sh` → `NEOFORGE_VERSION` — drives the **server** install.
+3. This README, "Option B" step 2 — the number a new player types in Prism.
+
+To bump the loader:
+
+1. Confirm the build exists at
+   `https://maven.neoforged.net/releases/net/neoforged/neoforge/maven-metadata.xml`.
+2. Edit all three places above to the new build. Run `packwiz refresh`. Commit and
+   push.
+3. If the bump also changes Minecraft, edit `minecraft` in `pack.toml` too, then
+   run `packwiz update --all` and check every mod has a build for the new version
+   before you ship.
+4. Update each **running client** — see "Updating an existing instance to a new
+   loader" below.
+5. Update the **server** — see "Upgrading the loader on a running server" below.
 
 ---
 
@@ -94,8 +151,9 @@ and the "jar not accessible" error cannot happen.
 ### Option B — Manual setup on a machine
 
 1. Install **Prism Launcher**.
-2. **Add Instance → NeoForge → Minecraft `26.2` → loader `26.2.0.32-beta`**
-   (tick "show beta versions" in the version list if it's hidden).
+2. **Add Instance → NeoForge → Minecraft `26.2` → loader `26.2.0.67`**
+   (this must match `neoforge` in `pack.toml`; tick "show beta versions" in the
+   version list only if you pin a beta build).
 3. **Put the bootstrap jar in `.minecraft`** — this is the step that prevents the
    error. Right-click the instance → **Folder** (opens `.minecraft`), and
    download the jar into that folder:
@@ -110,6 +168,17 @@ and the "jar not accessible" error cannot happen.
    "$INST_JAVA" -jar "$INST_MC_DIR/packwiz-installer-bootstrap.jar" https://raw.githubusercontent.com/rgevers/geverscraft-modpack/master/pack.toml
    ```
 5. **Launch.** It downloads the mods/configs/packs, then starts the game.
+
+### Updating an existing instance to a new loader
+
+`packwiz-installer` syncs mods and configs only — it never changes NeoForge. When
+the pack moves to a new loader build, update each instance by hand:
+
+1. Right-click the instance → **Edit**.
+2. Open the **Version** tab.
+3. Select the **NeoForge** row → **Change version** → pick the new build (match
+   `neoforge` in `pack.toml`) → **OK**.
+4. **Launch.** `packwiz-installer` then syncs mods on top of the new loader.
 
 ### Still seeing "Unable to access jarfile"?
 
@@ -143,3 +212,36 @@ The server is bootstrapped from this same pack and slots into the `mcctl` /
 The generated `start` script re-syncs mods from the pack on every launch, so
 `/mc start <name>` always boots the current pack version. Comment that line out
 if you'd rather pin the server and update it deliberately.
+
+### Upgrading the loader on a running server
+
+Mods auto-sync every restart, but the **NeoForge loader does not**. The loader is
+installed only at bootstrap, and its version is baked into the generated `start`
+script. So a loader bump needs a re-run of `install-server.sh` on the box. Push
+the repo change first (the script is fetched from `master`), then, as the
+`ec2-user`, with `<name>` = the live server (for example `server26adv`):
+
+```
+# Find the Java 25 path (MC 26.2 needs Java 25).
+J="$(ls -d /usr/lib/jvm/java-25-amazon-corretto*/bin/java 2>/dev/null | head -1)"; "$J" -version
+
+mcctl stop <name>
+
+# Fetch the current script and confirm it carries the new loader build.
+curl -fSL -o /tmp/install-server.sh https://raw.githubusercontent.com/rgevers/geverscraft-modpack/master/server/install-server.sh
+grep -E '^NEOFORGE_VERSION=' /tmp/install-server.sh
+
+# Set the two variables and run it.
+sed -i "s#^SERVER_NAME=.*#SERVER_NAME=\"<name>\"#; s#^JAVA_BIN=.*#JAVA_BIN=\"$J\"#" /tmp/install-server.sh
+sudo bash /tmp/install-server.sh
+
+# The run uses sudo, so hand the files back to the service user, then start.
+sudo chown -R minecraft:minecraft /opt/minecraft/<name>
+mcctl start <name>
+
+# Confirm the log names the new loader build.
+grep -i "neoforge" /opt/minecraft/<name>/logs/latest.log | head
+```
+
+The re-run installs the new loader and rewrites `start` to point at it. The world
+and `server.properties` are not touched.
